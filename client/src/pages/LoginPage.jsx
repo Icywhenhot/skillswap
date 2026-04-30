@@ -43,30 +43,46 @@ const LoginPage = () => {
     // API call
     dispatch(loginStart());
     try {
-      const response = await axios.post("http://localhost:5000/api/auth/login", {
-        email,
-        password,
-      });
+      let token;
+      let decoded;
+      let userData;
 
-
-      const token = response.data.token;
-      const decoded = jwtDecode(token)
+      // Hardcoded Demo Accounts
+      if (email === 'admin@demo.com' || email === 'user@demo.com') {
+        token = 'demo-token-12345';
+        const role = email === 'admin@demo.com' ? 'admin' : 'user';
+        decoded = { user: { role: role } };
+        userData = {
+          name: role === 'admin' ? 'Demo Admin' : 'Demo User',
+          email: email,
+          _id: 'demo-id-12345'
+        };
+      } else {
+        const response = await axios.post("http://localhost:5000/api/auth/login", {
+          email,
+          password,
+        });
+        token = response.data.token;
+        decoded = jwtDecode(token);
+        userData = {
+          name: response.data.name,
+          email: response.data.email,
+          _id: response.data.id
+        };
+      }
 
       const role = decoded?.user?.role || 'user';
 
-
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify({
-        name: response.data.name,
-        email: response.data.email,
-        _id: response.data.id,
-        role: decoded.user.role // Save role too
+        ...userData,
+        role: role
       }));
 
       dispatch(loginSuccess(token));
 
       // Redirect based on role
-      if (decoded.user.role === 'admin') {
+      if (role === 'admin') {
         navigate('/admin');
       } else {
         navigate('/profile');

@@ -52,6 +52,23 @@ const ProfilePage = () => {
     const fetchUserProfile = async () => {
       const token = localStorage.getItem("token");
       if (!token) return;
+
+      if (token === 'demo-token-12345') {
+        const storedUser = JSON.parse(localStorage.getItem('user'));
+        const demoUser = {
+          ...storedUser,
+          skillsToTeach: ["Web Development", "React", "JavaScript"],
+          skillsToLearn: ["Machine Learning", "Python"],
+          status: "Available for mentoring",
+          socials: { linkedin: "https://linkedin.com", github: "https://github.com" },
+        };
+        setUser(demoUser);
+        setSkillsToTeach(demoUser.skillsToTeach);
+        setSkillsToLearn(demoUser.skillsToLearn);
+        dispatch(setNotifications([]));
+        return;
+      }
+
       try {
         const { data } = await axios.get(
           "http://localhost:5000/api/users/profile",
@@ -78,6 +95,42 @@ const ProfilePage = () => {
     const fetchSessions = async () => {
       const token = localStorage.getItem("token");
       if (!token) return;
+
+      if (token === 'demo-token-12345') {
+        const demoPending = [
+          {
+            _id: 'sess-1',
+            userId1: { _id: 'demo-id-12345', name: 'Demo User' },
+            userId2: { _id: 'hashim-id', name: 'Hashim' },
+            skill: 'React Mentorship',
+            sessionDate: new Date(Date.now() + 86400000).toISOString() // tomorrow
+          }
+        ];
+        const demoAccepted = [
+          {
+            _id: 'sess-2',
+            userId1: { _id: 'shaheer-id', name: 'Shaheer Hashmi' },
+            userId2: { _id: 'demo-id-12345', name: 'Demo User' },
+            skill: 'Python Basics',
+            sessionDate: new Date(Date.now() + 172800000).toISOString() // day after tomorrow
+          }
+        ];
+        const demoCompleted = [
+          {
+            _id: 'sess-3',
+            userId1: { _id: 'demo-id-12345', name: 'Demo User' },
+            userId2: { _id: 'hashim-id', name: 'Hashim' },
+            skill: 'JavaScript Debugging',
+            sessionDate: new Date(Date.now() - 86400000).toISOString() // yesterday
+          }
+        ];
+        setPendingSessions(demoPending);
+        setAcceptedSessions(demoAccepted);
+        setCompletedSessions(demoCompleted);
+        setCanceledSessions([]);
+        return;
+      }
+
       try {
         const [p, a, co, c] = await Promise.all([
           axios.get("http://localhost:5000/api/sessions/pending", {
@@ -125,6 +178,20 @@ const ProfilePage = () => {
 
   const handleUpdateProfile = async () => {
     const token = localStorage.getItem("token");
+    if (token === 'demo-token-12345') {
+        const updatedUser = {
+          ...user,
+          skillsToTeach: modalTeach.split(",").map((s) => s.trim()).filter(Boolean),
+          skillsToLearn: modalLearn.split(",").map((s) => s.trim()).filter(Boolean),
+        };
+        setUser(updatedUser);
+        setSkillsToTeach(updatedUser.skillsToTeach);
+        setSkillsToLearn(updatedUser.skillsToLearn);
+        setSuccess("Profile updated successfully!");
+        closeModal();
+        return;
+    }
+
     try {
       const { data } = await axios.put(
         "http://localhost:5000/api/users/profile",
@@ -150,6 +217,16 @@ const ProfilePage = () => {
   // Session actions
   const handleAccept = async (id) => {
     const token = localStorage.getItem("token");
+    if (token === 'demo-token-12345') {
+      const acceptedSession = pendingSessions.find(s => s._id === id);
+      if (acceptedSession) {
+        setPendingSessions((ps) => ps.filter((s) => s._id !== id));
+        setAcceptedSessions((as) => [...as, acceptedSession]);
+        setSuccess("Session accepted");
+      }
+      return;
+    }
+
     try {
       const res = await axios.post(
         "http://localhost:5000/api/sessions/accept",

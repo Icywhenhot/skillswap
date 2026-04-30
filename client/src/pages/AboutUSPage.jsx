@@ -10,40 +10,16 @@ import "../components/background/Background.css";
 
 // Importing images
 import ahmadImg from "../assets/ahmad.jpg";
-import wahajImg from "../assets/wahaj.jpg";
-import miraalImg from "../assets/miraal.jpg";
-import muneebImg from "../assets/muneeb.jpg";
 import hashimImg from "../assets/hashim.jpeg";
 
 // Team data with images
 const team = [
   {
-    name: "Ahmad Wyne",
-    role: "Backend Developer",
-    image: ahmadImg,
-    linkedin: "https://www.linkedin.com/in/ahmad-wyne-179511253/",
-    github: "https://github.com/ahmadwyne",
-  },
-  {
-    name: "Wahaj Asif",
+    name: "Shaheer Hashmi",
     role: "Frontend Developer",
-    image: wahajImg,
-    linkedin: "https://www.linkedin.com/in/muhammad-wahaj-asif-7a9118254/",
-    github: "https://github.com/coderwahaj",
-  },
-  {
-    name: "Miraal Fatima",
-    role: "Frontend Developer",
-    image: miraalImg,
-    linkedin: "https://www.linkedin.com/in/miraal-fatima-/",
-    github: "https://github.com/MiraalFatima",
-  },
-  {
-    name: "Muhammad Muneeb",
-    role: "Backend Developer",
-    image: muneebImg,
-    linkedin: "https://www.linkedin.com/in/muhammad-muneeb-147322247/",
-    github: "https://github.com/themuneeeb",
+    image: ahmadImg, // Placeholder image for Shaheer
+    linkedin: "https://www.linkedin.com",
+    github: "https://github.com",
   },
   {
     name: "Hashim Wyne",
