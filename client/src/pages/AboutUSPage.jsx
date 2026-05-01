@@ -9,7 +9,7 @@ import Background from "../components/background/Background";
 import "../components/background/Background.css";
 
 // Importing images
-import ahmadImg from "../assets/ahmad.jpg";
+import shaheer from "../assets/shaheer.jpeg";
 import hashimImg from "../assets/hashim.jpeg";
 
 // Team data with images
@@ -17,7 +17,7 @@ const team = [
   {
     name: "Shaheer Hashmi",
     role: "Frontend Developer",
-    image: ahmadImg, // Placeholder image for Shaheer
+    image: shaheer,
     linkedin: "https://www.linkedin.com",
     github: "https://github.com",
   },

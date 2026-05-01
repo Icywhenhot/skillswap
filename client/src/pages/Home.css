@@ -1,110 +1,201 @@
 .home-hero {
-    position: relative;
-    min-height: 100vh;
-    font-family: 'Segoe UI', sans-serif;
-    color: white;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
-    background-position: center;
-    overflow-x: hidden;
-  }
-  
-  .overlay {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-  }
-  
-  .hero-content {
-    z-index: 1;
-    padding: 5rem 2rem 4rem;
-    text-align: center;
-  }
-  
-  .hero-title {
-    font-size: 2rem;
-    font-weight: 700;
-    margin-top: 1rem;
-    margin-bottom: 1.5rem;
-    background: white;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-  
-  .hero-subtitle {
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
-    color: #e0f2ff;
-    font-style: bold;
-  }
-  
-  .cta-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    flex-wrap: wrap;
-    position: relative; /* Add this to ensure it's correctly stacked */
-    z-index: 10; /* Ensure it's above other elements */
-  }
-  
-  .btn {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.75rem 1.5rem;
-    border-radius: 9999px;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    font-size: 1rem;
-    text-decoration: none;
-    cursor: pointer;
-  }
-  
-  .primary {
-    background: #4361ee;
-    color: white;
-  }
-  
-  .primary:hover {
-    background: #3a0ca3;
-  }
-  
-  .secondary {
-    background: white;
-    color: #4361ee;
-  }
-  
-  .secondary:hover {
-    background: #f0f0f0;
-  }
-  
-  /* Glassmorphism Section */
-  .glass-panel {
-    backdrop-filter: blur(16px);
-    background: rgba(255, 255, 255, 0.1);
-    padding: 4rem 2rem;
-    border-radius: 2rem;
-    margin: 4rem auto;
-    width: 90%;
-    max-width: 1100px;
-    color: white;
-    z-index: 2;
-  }
-  
-  .info-grid {
-    display: grid;
-    gap: 2rem;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  }
-  
-  .info-grid h3 {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
-    color: #ffffff;
-  }
-  
-  .info-grid p {
-    color: #f0f8ff;
-  }
-  
+  position: relative;
+  min-height: 100vh;
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  color: white;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  overflow-x: hidden;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(15, 23, 42, 0.85) 0%,
+    rgba(30, 58, 138, 0.75) 50%,
+    rgba(67, 56, 202, 0.7) 100%
+  );
+}
+
+.home-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(99, 102, 241, 0.35), transparent 40%),
+    radial-gradient(circle at 80% 30%, rgba(56, 189, 248, 0.25), transparent 45%),
+    radial-gradient(circle at 50% 90%, rgba(236, 72, 153, 0.2), transparent 50%);
+  pointer-events: none;
+}
+
+.home-hero > nav {
+  position: relative;
+  z-index: 3;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 4rem 2rem 5rem;
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+  animation: fadeInUp 0.9s ease-out both;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero-title {
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 600;
+  margin-top: 0.75rem;
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.5px;
+  color: #f8fafc;
+}
+
+.hero-subtitle {
+  font-size: clamp(1rem, 1.6vw, 1.2rem);
+  margin: 0 auto 2.5rem;
+  max-width: 640px;
+  color: #e2e8f0;
+  line-height: 1.6;
+}
+
+.cta-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 10;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.75rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;
+  font-size: 1rem;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+}
+
+.primary {
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+  color: white;
+}
+
+.primary:hover {
+  background: linear-gradient(135deg, #4338ca, #4f46e5);
+}
+
+.secondary {
+  background: rgba(255, 255, 255, 0.95);
+  color: #4338ca;
+}
+
+.secondary:hover {
+  background: white;
+}
+
+/* Glassmorphism Section */
+.glass-panel {
+  position: relative;
+  z-index: 2;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  padding: 3rem 2rem;
+  border-radius: 1.5rem;
+  margin: 3rem auto 5rem;
+  width: 90%;
+  max-width: 1100px;
+  color: white;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+}
+
+.info-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.info-grid > div {
+  padding: 1.25rem;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.info-grid > div:hover {
+  transform: translateY(-4px);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.info-grid h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.info-grid p {
+  color: #cbd5e1;
+  line-height: 1.55;
+}
+
+.quick-card {
+  display: block;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: inherit;
+  text-decoration: none;
+  transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+}
+
+.quick-card:hover {
+  transform: translateY(-4px);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.quick-card svg {
+  color: #a5b4fc;
+  margin-bottom: 0.75rem;
+}
+
+.quick-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.4rem;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.quick-card p {
+  color: #cbd5e1;
+  line-height: 1.55;
+  margin: 0;
+}

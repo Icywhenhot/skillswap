@@ -1,0 +1,15 @@
+{
+  "name": "skillswap",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "concurrently -n backend,client -c blue,green \"npm run dev:backend\" \"npm run dev:client\"",
+    "dev:backend": "node backend/server.js",
+    "dev:client": "npm --prefix client run dev",
+    "install:all": "npm install && npm --prefix backend install && npm --prefix client install",
+    "seed": "node backend/scripts/seedUsers.js"
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.0"
+  }
+}

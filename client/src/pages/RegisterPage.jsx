@@ -4,9 +4,11 @@ import axios from "axios";
 import { motion } from "framer-motion";
 import { FiUser, FiMail, FiLock } from "react-icons/fi";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 import registerImage from "../assets/auth-bg.jpg"; // Use same image as login
 
 const RegisterPage = () => {
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -48,13 +50,15 @@ const RegisterPage = () => {
           password,
         }
       );
-      setSuccessMessage("Registration successful! Please log in.");
+      setSuccessMessage("Registration successful! Redirecting to login...");
 
       // Clear the fields after successful registration
       setName("");
       setEmail("");
       setPassword("");
       setConfirmPassword("");
+
+      setTimeout(() => navigate("/login"), 1200);
     } catch (err) {
       setError(err.response?.data?.msg || "Something went wrong!");
     }

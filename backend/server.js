@@ -1,3 +1,9 @@
+// Polyfill for `Buffer.SlowBuffer`, removed in Node 22+, still referenced by
+// the `buffer-equal-constant-time` transitive dep used by jsonwebtoken.
+if (!require('buffer').SlowBuffer) {
+  require('buffer').SlowBuffer = require('buffer').Buffer;
+}
+
 const express    = require('express');
 const mongoose   = require('mongoose');
 const cors       = require('cors');
@@ -20,7 +26,7 @@ const { setSocket: setNotificationSocketIO } = require('./controllers/notificati
 const adminRoutes = require('./routes/adminRoutes');  // ← Admin dashboard routes
 const reportRoutes = require('./routes/reportRoutes'); // Import reportRoutes
 
-dotenv.config();
+dotenv.config({ path: path.join(__dirname, '.env') });
 
 const app    = express();
 const server = http.createServer(app);
